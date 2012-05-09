@@ -1,0 +1,15 @@
+﻿<Window x:Class="CooperativeSokoban.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="CooperativeSokoban" Height="350" Width="525">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Name="mnuMenu">
+            <MenuItem Header="_File">
+                <MenuItem Header="_Open level..." InputGestureText="Crtl+O" Click="FileOpenLevel_Click" />
+                <Separator/>
+                <MenuItem Header="E_xit" InputGestureText="Alt+F4"/>
+            </MenuItem>
+        </Menu>
+        <StackPanel></StackPanel>
+    </DockPanel>
+</Window>

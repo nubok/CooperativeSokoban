@@ -1,0 +1,4 @@
+source.txt crlf
+*.txt -crlf
+*.hsb -crlf
+*.xsb -crlf
