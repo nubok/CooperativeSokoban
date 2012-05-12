@@ -1,2 +1,8 @@
+PlanetCute.xaml:
+
+http://www.lostgarden.com/2007/05/dancs-miraculously-flexible-game.html
+
+"levels" folder:
+
 http://www.erimsever.com/sokoban/E_Levels.zip
 linked from http://www.erimsever.com/e_sokoban.htm and http://www.erimsever.com/sokoban8.htm
