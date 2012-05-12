@@ -28,13 +28,23 @@ namespace CooperativeSokoban
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = "*.xsb";
-            dlg.Filter = "Hexoban level|*.hsb|XSokoban/SokoMind Plus level|*.xsb|Txt levels|*.txt|All files|*.*";
-            bool? result = dlg.ShowDialog();
+            dlg.Filter = //"Hexoban level|*.hsb|"+
+                "XSokoban/SokoMind Plus level|*.xsb|Txt levels|*.txt|All files|*.*";
+            bool? dlgResult = dlg.ShowDialog();
 
-            if (result == true)
+            if (dlgResult == true)
             {
-                // Open document
                 string filename = dlg.FileName;
+                LevelLoadingResult llr = LevelLoader.loadLevel(filename);
+
+                if (llr == LevelLoadingResult.FileNotFound)
+                {
+                    MessageBox.Show("The file '"+filename+"' could not be found.");
+                }
+                else if (llr == LevelLoadingResult.InvalidLevel)
+                {
+                    MessageBox.Show("The file '"+filename+"' contains invalid level data.");
+                }
             }
         }
     }
