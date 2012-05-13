@@ -12,13 +12,38 @@ namespace CooperativeSokoban
         FileNotFound, 
         InvalidLevel
     }
+
+    enum LevelFileType
+    {
+        XsbFile,
+        HsbFile,
+        TxtFile
+    }
     
     class LevelLoader
     {
         public static LevelLoadingResult loadLevel(string filename)
         {
-            string szSrcLine;
             FileStream fsInput;
+
+            if (filename.Length <= 4)
+                return LevelLoadingResult.InvalidLevel;
+
+            LevelFileType fileType;
+            
+            {
+                string ending = filename.Substring(filename.Length - 3).ToLower();
+                LevelFileType? ntype = 
+                    (ending == "xsb") ? LevelFileType.XsbFile :
+                    (ending == "hsb") ? LevelFileType.HsbFile :
+                    (ending == "txt") ? LevelFileType.TxtFile : new Nullable<LevelFileType>();
+
+                if (ntype == null)
+                    return LevelLoadingResult.InvalidLevel;
+
+                fileType = (LevelFileType) ntype;
+            }
+
             try
             {
                 fsInput = new FileStream(filename, FileMode.Open, FileAccess.Read);
@@ -29,10 +54,39 @@ namespace CooperativeSokoban
             }
             StreamReader srInput = new StreamReader(fsInput);
 
-            while ((szSrcLine = srInput.ReadLine()) != null)
+            LinkedList<LinkedList<string>> levels = new LinkedList<LinkedList<string>>();
+            LinkedList<string> currentLevel = (fileType == LevelFileType.TxtFile) ? 
+                null : new LinkedList<string>();
+
             {
-                // hier Zeile verarbeiten....
+                string szSrcLine;
+                while ((szSrcLine = srInput.ReadLine()) != null)
+                {
+                    if (szSrcLine.StartsWith(";"))
+                    {
+                        if (!szSrcLine.EndsWith(".xsb")) // TODO ".hsb"
+                        {
+                            return LevelLoadingResult.InvalidLevel;
+                        }
+
+                        // The current level is done
+                        levels.AddLast(currentLevel);
+                        currentLevel = new LinkedList<string>();
+                    }
+
+                    //lines.AddLast(szSrcLine);
+                }
             }
+
+            //try
+            //{
+            //    int maxlen = currentLevel.Max(str => str.Length);
+            //}
+            //// Happens when list is empty
+            //catch (InvalidOperationException)
+            //{
+            //}
+
             srInput.Close();
             fsInput.Close();
 

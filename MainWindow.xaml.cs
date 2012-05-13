@@ -29,7 +29,8 @@ namespace CooperativeSokoban
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = "*.xsb";
             dlg.Filter = //"Hexoban level|*.hsb|"+
-                "XSokoban/SokoMind Plus level|*.xsb|Txt levels|*.txt|All files|*.*";
+                "XSokoban/SokoMind Plus level|*.xsb|Txt levels|*.txt"
+                +"|All files|*.*";
             bool? dlgResult = dlg.ShowDialog();
 
             if (dlgResult == true)
@@ -43,9 +44,14 @@ namespace CooperativeSokoban
                 }
                 else if (llr == LevelLoadingResult.InvalidLevel)
                 {
-                    MessageBox.Show("The file '"+filename+"' contains invalid level data.");
+                    MessageBox.Show("The file '"+filename+"' either is an invalid file or contains invalid level data.");
                 }
             }
+        }
+
+        private void FileExit_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Shutdown();
         }
     }
 }

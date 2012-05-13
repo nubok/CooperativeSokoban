@@ -7,7 +7,7 @@
             <MenuItem Header="_File">
                 <MenuItem Header="_Open level..." InputGestureText="Crtl+O" Click="FileOpenLevel_Click" />
                 <Separator/>
-                <MenuItem Header="E_xit" InputGestureText="Alt+F4"/>
+                <MenuItem Header="E_xit" InputGestureText="Alt+F4" Click="FileExit_Click" />
             </MenuItem>
         </Menu>
         <StackPanel></StackPanel>
