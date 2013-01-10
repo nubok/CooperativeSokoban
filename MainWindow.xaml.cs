@@ -19,9 +19,19 @@ namespace CooperativeSokoban
     /// </summary>
     public partial class MainWindow : Window
     {
+        Canvas box;
+
         public MainWindow()
         {
             InitializeComponent();
+
+            Canvas planetCute = (from c in (levelRoot.FindResource("tiles") as Canvas)
+                                  .Children.OfType<Canvas>()
+                                 where c.Name == "PlanetCute_design"
+                                 select c).First();
+
+            /*box = (from c in planetCute.Children.OfType<Canvas>()
+                   where c.Name == */
         }
 
         private void FileOpenLevel_Click(object sender, RoutedEventArgs e)
@@ -30,7 +40,7 @@ namespace CooperativeSokoban
             dlg.DefaultExt = "*.xsb";
             dlg.Filter = //"Hexoban level|*.hsb|"+
                 "XSokoban/SokoMind Plus level|*.xsb|Txt levels|*.txt"
-                +"|All files|*.*";
+                + "|All files|*.*";
             bool? dlgResult = dlg.ShowDialog();
 
             if (dlgResult == true)
@@ -40,11 +50,11 @@ namespace CooperativeSokoban
 
                 if (llr == LevelLoadingResult.FileNotFound)
                 {
-                    MessageBox.Show("The file '"+filename+"' could not be found.");
+                    MessageBox.Show("The file '" + filename + "' could not be found.");
                 }
                 else if (llr == LevelLoadingResult.InvalidLevel)
                 {
-                    MessageBox.Show("The file '"+filename+"' either is an invalid file or contains invalid level data.");
+                    MessageBox.Show("The file '" + filename + "' either is an invalid file or contains invalid level data.");
                 }
             }
         }

@@ -10,6 +10,12 @@
                 <MenuItem Header="E_xit" InputGestureText="Alt+F4" Click="FileExit_Click" />
             </MenuItem>
         </Menu>
-        <StackPanel></StackPanel>
+        <StackPanel>
+            <Canvas x:Name="levelRoot">
+                <Canvas.Resources>
+                    <ResourceDictionary Source="TilesDictionary.xaml"></ResourceDictionary>
+                </Canvas.Resources>
+            </Canvas>
+        </StackPanel>
     </DockPanel>
 </Window>
